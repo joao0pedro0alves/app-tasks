@@ -1,38 +1,53 @@
-import {View, Text, StyleSheet, StyleProp, TextStyle} from "react-native"
+import {
+    View,
+    Text,
+    StyleSheet,
+    StyleProp,
+    TextStyle,
+    TouchableWithoutFeedback,
+    GestureResponderEvent,
+} from "react-native"
 import CheckBox from "./CheckBox"
 
 import global from "../styles/global"
 import {formatDate} from "../services/utils"
 
-export interface TaskProps {
+export interface TaskData {
     id: number
     descr: string
     estimateAt: Date
     doneAt?: Date | null
 }
+export interface TaskProps {
+    task: TaskData
+    onToggleTask: (id: TaskData["id"], e: GestureResponderEvent) => void
+}
 
-function Task(props: TaskProps) {
-    const donned = props.doneAt !== null && props.doneAt !== undefined
+function TaskRow({task, onToggleTask}: TaskProps) {
+    const donned = task.doneAt !== null && task.doneAt !== undefined
     const titleStyles: StyleProp<TextStyle>[] = [styles.desc]
 
     if (donned) {
         titleStyles.push({
             textDecorationLine: "line-through",
+            color: global.colors.textSecondary,
         })
     }
 
     const formattedDate = formatDate(
         "ddd, D [de] MMMM",
-        props.doneAt || props.estimateAt
+        task.doneAt || task.estimateAt
     )
 
     return (
         <View style={styles.container}>
-            <View style={styles.checkContainer}>
-                <CheckBox checked={donned} />
-            </View>
+            <TouchableWithoutFeedback onPress={(e) => onToggleTask(task.id, e)}>
+                <View style={styles.checkContainer}>
+                    <CheckBox checked={donned} />
+                </View>
+            </TouchableWithoutFeedback>
             <View>
-                <Text style={titleStyles}>{props.descr}</Text>
+                <Text style={titleStyles}>{task.descr}</Text>
                 <Text style={styles.date}>{formattedDate}</Text>
             </View>
         </View>
@@ -65,4 +80,4 @@ const styles = StyleSheet.create({
     },
 })
 
-export default Task
+export default TaskRow

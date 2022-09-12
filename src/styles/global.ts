@@ -9,6 +9,6 @@ export default {
         borderColor: "#AAA",
         checkIcon: "#FFF",
         textPrimary: "#222",
-        textSecondary: "#555",
+        textSecondary: "#888",
     },
 }
