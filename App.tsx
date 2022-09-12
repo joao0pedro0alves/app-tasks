@@ -1,13 +1,20 @@
 import {StatusBar} from "expo-status-bar"
-import {StyleSheet, View} from "react-native"
-import TaskList from "./components/TaskList"
+import {StyleSheet, SafeAreaView} from "react-native"
+
+import "moment/locale/pt-br"
+
+import SplashScreen from "./src/components/SplashScreen"
+import TaskList from "./src/screens/TaskList"
+import global from "./src/styles/global"
 
 export default function App() {
     return (
-        <View style={styles.container}>
+        <SafeAreaView style={styles.container}>
             <StatusBar style="auto" />
-            <TaskList />
-        </View>
+            <SplashScreen>
+                <TaskList />
+            </SplashScreen>
+        </SafeAreaView>
     )
 }
 
@@ -16,6 +23,6 @@ const styles = StyleSheet.create({
         flex: 1,
         alignItems: "center",
         justifyContent: "center",
-        backgroundColor: "#f5f5f5",
+        backgroundColor: global.colors.background,
     },
 })
