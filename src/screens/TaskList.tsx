@@ -8,11 +8,13 @@ import {
     TouchableOpacity,
 } from "react-native"
 import Icon from "react-native-vector-icons/FontAwesome"
-import Task, {TaskData} from "../components/Task"
 
 import todayBanner from "../assets/today.jpg"
 import global from "../styles/global"
 import {formatDate} from "../services/utils"
+
+import AddTask from "./AddTask"
+import Task, {TaskData} from "../components/Task"
 
 const initialTasks: TaskData[] = [
     {
@@ -32,6 +34,7 @@ const initialTasks: TaskData[] = [
 function TaskList() {
     const [tasks, setTasks] = useState<TaskData[]>([...initialTasks])
     const [showDoneTasks, setShowDoneTasks] = useState(true)
+    const [showAddTask, setShowAddTask] = useState(false)
 
     const handleToggleShowDone = () => setShowDoneTasks(!showDoneTasks)
 
@@ -48,12 +51,37 @@ function TaskList() {
         )
     }
 
+    const handleAdd = () => {
+        setShowAddTask(true)
+    }
+
+    const handleClose = () => {
+        setShowAddTask(false)
+    }
+
+    const handleSave = (params: any) => {
+        const newTask = {
+            id: Math.random(),
+            descr: params.descr,
+            estimateAt: params.date,
+            doneAt: null,
+        }
+
+        setTasks((previousTasks) => previousTasks.concat(newTask))
+        handleClose()
+    }
+
     const filteredTasks = !showDoneTasks
         ? tasks.filter((t) => t.doneAt === null || t.doneAt === undefined)
         : tasks
 
     return (
         <View style={styles.container}>
+            <AddTask
+                onSave={handleSave}
+                onCancel={handleClose}
+                isVisible={showAddTask}
+            />
             <ImageBackground
                 style={styles.headerContainer}
                 source={todayBanner}
@@ -86,6 +114,13 @@ function TaskList() {
                     )}
                 />
             </View>
+            <TouchableOpacity
+                activeOpacity={0.7}
+                style={styles.addButton}
+                onPress={handleAdd}
+            >
+                <Icon name="plus" size={24} color={global.colors.secondary} />
+            </TouchableOpacity>
         </View>
     )
 }
@@ -123,6 +158,17 @@ const styles = StyleSheet.create({
         fontFamily: global.fontFamilyThin,
         color: global.colors.secondary,
         fontSize: 20,
+    },
+    addButton: {
+        backgroundColor: global.colors.primary,
+        position: "absolute",
+        bottom: 32,
+        right: 32,
+        height: 50,
+        width: 50,
+        borderRadius: 32,
+        justifyContent: "center",
+        alignItems: "center",
     },
 })
 
