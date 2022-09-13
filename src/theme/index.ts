@@ -1,4 +1,4 @@
-export default {
+export const THEME = {
     fontFamily: "Lato_400Regular",
     fontFamilyThin: "Lato_300Light",
     fontFamilyBold: "Lato_700Bold",
@@ -17,3 +17,5 @@ export default {
         },
     },
 }
+
+export default THEME

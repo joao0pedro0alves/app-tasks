@@ -2,27 +2,28 @@ import {useState} from "react"
 import {
     Modal,
     View,
-    StyleSheet,
     TouchableWithoutFeedback,
     TouchableOpacity,
     Text,
 } from "react-native"
-import DateTimeField from "../components/DateTimeField"
-import TextInputField from "../components/TextInputField"
-import global from "../styles/global"
+
+import {DateField} from "../../components/DateField"
+import {TextField} from "../../components/TextField"
+
+import {styles} from "./styles"
 
 const initialState = {
     descr: "Tarefa #01",
     date: new Date(),
 }
 
-interface AddTaskProps {
+interface TaskFormProps {
     isVisible: boolean
     onCancel: () => void
     onSave: (data: typeof initialState) => void
 }
 
-function AddTask({isVisible, onSave, onCancel}: AddTaskProps) {
+export function TaskForm({isVisible, onSave, onCancel}: TaskFormProps) {
     const [formValues, setFormValues] = useState({
         ...initialState,
     })
@@ -49,14 +50,14 @@ function AddTask({isVisible, onSave, onCancel}: AddTaskProps) {
                     <Text style={styles.header}>Nova Tarefa</Text>
 
                     <View style={styles.form}>
-                        <TextInputField
+                        <TextField
                             placeholder="Informe a descrição..."
                             value={formValues.descr}
                             onChangeText={(newText: string) =>
                                 handleChangeFormValue("descr", newText)
                             }
                         />
-                        <DateTimeField
+                        <DateField
                             placeholder="Informe a data de conclusão..."
                             value={formValues.date}
                             onChange={(_, newDate) =>
@@ -64,6 +65,7 @@ function AddTask({isVisible, onSave, onCancel}: AddTaskProps) {
                             }
                         />
                     </View>
+
                     <View style={styles.buttons}>
                         <TouchableOpacity onPress={onCancel}>
                             <Text style={styles.button}>Cancelar</Text>
@@ -79,48 +81,3 @@ function AddTask({isVisible, onSave, onCancel}: AddTaskProps) {
         </Modal>
     )
 }
-
-const styles = StyleSheet.create({
-    backdrop: {
-        flex: 1,
-        backgroundColor: "rgba(0,0,0,0.5)",
-    },
-    container: {
-        flex: 1,
-        paddingHorizontal: 32,
-        paddingVertical: 32,
-        backgroundColor: global.colors.background,
-        borderTopRightRadius: 30,
-        borderTopLeftRadius: 30,
-        elevation: 15,
-    },
-    header: {
-        fontFamily: global.fontFamilyBold,
-        color: global.colors.primary,
-        fontSize: 20,
-    },
-    form: {
-        flex: 1,
-        zIndex: 2,
-    },
-    buttons: {
-        zIndex: 1,
-        flexDirection: "row",
-        justifyContent: "space-between",
-    },
-    button: {
-        fontFamily: global.fontFamilyBold,
-        paddingHorizontal: 16,
-        paddingVertical: 8,
-        color: global.colors.primary,
-        borderRadius: 4,
-        fontSize: 14,
-    },
-    buttonSave: {
-        backgroundColor: global.colors.primary,
-        color: global.colors.secondary,
-        elevation: 1,
-    },
-})
-
-export default AddTask

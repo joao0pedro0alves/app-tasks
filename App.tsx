@@ -1,28 +1,37 @@
-import {StatusBar} from "expo-status-bar"
-import {StyleSheet, SafeAreaView} from "react-native"
-
+import {StatusBar} from "react-native"
 import "moment/locale/pt-br"
 
-import SplashScreen from "./src/components/SplashScreen"
-import TaskList from "./src/screens/TaskList"
-import global from "./src/styles/global"
+import {
+    useFonts,
+    Lato_100Thin,
+    Lato_300Light,
+    Lato_400Regular,
+    Lato_700Bold,
+    Lato_900Black,
+} from "@expo-google-fonts/lato"
+
+import {Background} from "./src/components/Background"
+import {Loading} from "./src/components/Loading"
+
+import {Home} from "./src/screens/Home"
 
 export default function App() {
+    const [fontsLoaded] = useFonts({
+        Lato_100Thin,
+        Lato_300Light,
+        Lato_400Regular,
+        Lato_700Bold,
+        Lato_900Black,
+    })
+
     return (
-        <SafeAreaView style={styles.container}>
-            <StatusBar style="auto" />
-            <SplashScreen>
-                <TaskList />
-            </SplashScreen>
-        </SafeAreaView>
+        <Background>
+            <StatusBar
+                barStyle="light-content"
+                backgroundColor="transparent"
+                translucent
+            />
+            {fontsLoaded ? <Home /> : <Loading />}
+        </Background>
     )
 }
-
-const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        alignItems: "center",
-        justifyContent: "center",
-        backgroundColor: global.colors.background,
-    },
-})

@@ -1,16 +1,18 @@
 import {
     View,
     Text,
-    StyleSheet,
     StyleProp,
     TextStyle,
     TouchableWithoutFeedback,
     GestureResponderEvent,
 } from "react-native"
-import CheckBox from "./CheckBox"
 
-import global from "../styles/global"
-import {formatDate} from "../services/utils"
+import {CheckBox} from "../Checkbox"
+
+import {THEME} from "../../theme"
+import {formatDate} from "../../services/utils"
+
+import {styles} from "./styles"
 
 export interface TaskData {
     id: number
@@ -18,19 +20,20 @@ export interface TaskData {
     estimateAt: Date
     doneAt?: Date | null
 }
-export interface TaskProps {
+
+interface TaskProps {
     task: TaskData
     onToggleTask: (id: TaskData["id"], e: GestureResponderEvent) => void
 }
 
-function TaskRow({task, onToggleTask}: TaskProps) {
+export function Task({task, onToggleTask}: TaskProps) {
     const donned = task.doneAt !== null && task.doneAt !== undefined
     const titleStyles: StyleProp<TextStyle>[] = [styles.desc]
 
     if (donned) {
         titleStyles.push({
             textDecorationLine: "line-through",
-            color: global.colors.textSecondary,
+            color: THEME.colors.textSecondary,
         })
     }
 
@@ -53,31 +56,3 @@ function TaskRow({task, onToggleTask}: TaskProps) {
         </View>
     )
 }
-
-const styles = StyleSheet.create({
-    container: {
-        borderColor: global.colors.borderColor,
-        borderBottomWidth: 1,
-        flexDirection: "row",
-        alignItems: "center",
-        paddingVertical: 10,
-    },
-    checkContainer: {
-        width: "20%",
-        alignItems: "center",
-        justifyContent: "center",
-    },
-    desc: {
-        color: global.colors.textPrimary,
-        fontFamily: global.fontFamily,
-        fontSize: 14,
-        lineHeight: 20,
-    },
-    date: {
-        color: global.colors.textSecondary,
-        fontFamily: global.fontFamily,
-        fontSize: 12,
-    },
-})
-
-export default TaskRow
