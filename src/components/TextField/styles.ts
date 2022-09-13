@@ -3,9 +3,9 @@ import {THEME} from "../../theme"
 
 export const styles = StyleSheet.create({
     container: {
-        fontFamily: THEME.fontFamily,
-        backgroundColor: THEME.colors.input.background,
-        borderColor: THEME.colors.input.borderColor,
+        fontFamily: THEME.FONT_FAMILY.REGULAR,
+        backgroundColor: THEME.COLORS.BACKGROUND,
+        borderColor: THEME.COLORS.BACKGROUND_200,
         fontSize: 16,
         height: 64,
         marginTop: 16,

@@ -25,18 +25,18 @@ export const styles = StyleSheet.create({
         marginBottom: 30,
     },
     title: {
-        fontFamily: THEME.fontFamilyThin,
-        color: THEME.colors.secondary,
+        fontFamily: THEME.FONT_FAMILY.THIN,
+        color: THEME.COLORS.SECONDARY,
         fontSize: 50,
         marginBottom: 20,
     },
     subtitle: {
-        fontFamily: THEME.fontFamilyThin,
-        color: THEME.colors.secondary,
+        fontFamily: THEME.FONT_FAMILY.THIN,
+        color: THEME.COLORS.SECONDARY,
         fontSize: 20,
     },
     addButton: {
-        backgroundColor: THEME.colors.primary,
+        backgroundColor: THEME.COLORS.PRIMARY,
         position: "absolute",
         bottom: 32,
         right: 32,

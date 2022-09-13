@@ -7,11 +7,11 @@ export const styles = StyleSheet.create({
         width: 25,
         borderRadius: 13,
         borderWidth: 1,
-        borderColor: THEME.colors.borderColor,
         alignItems: "center",
         justifyContent: "center",
+        borderColor: THEME.COLORS.BACKGROUND_400,
     },
     done: {
-        backgroundColor: THEME.colors.success,
+        backgroundColor: THEME.COLORS.SUCCESS,
     },
 })

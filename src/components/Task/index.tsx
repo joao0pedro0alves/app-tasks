@@ -33,7 +33,7 @@ export function Task({task, onToggleTask}: TaskProps) {
     if (donned) {
         titleStyles.push({
             textDecorationLine: "line-through",
-            color: THEME.colors.textSecondary,
+            color: THEME.COLORS.TEXT_SECONDARY,
         })
     }
 

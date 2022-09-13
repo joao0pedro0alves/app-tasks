@@ -1,7 +1,5 @@
 import {View, StyleProp, ViewStyle} from "react-native"
 import Icon from "react-native-vector-icons/FontAwesome"
-
-import {THEME} from "../../theme"
 import {styles} from "./styles"
 
 interface CheckBoxProps {
@@ -19,7 +17,7 @@ export function CheckBox(props: CheckBoxProps) {
     return (
         <View style={checkStyles}>
             {props.checked && (
-                <Icon name="check" size={14} color={THEME.colors.checkIcon} />
+                <Icon name="check" size={14} color='#FFF' />
             )}
         </View>
     )

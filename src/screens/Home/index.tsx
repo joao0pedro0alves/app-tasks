@@ -90,7 +90,7 @@ export function Home() {
                     <TouchableOpacity onPress={handleToggleShowDone}>
                         <Icon
                             name={showDoneTasks ? "eye" : "eye-slash"}
-                            color={THEME.colors.secondary}
+                            color={THEME.COLORS.SECONDARY}
                             size={20}
                         />
                     </TouchableOpacity>
@@ -119,7 +119,7 @@ export function Home() {
                 style={styles.addButton}
                 onPress={handleAdd}
             >
-                <Icon name="plus" size={24} color={THEME.colors.secondary} />
+                <Icon name="plus" size={24} color={THEME.COLORS.SECONDARY} />
             </TouchableOpacity>
         </View>
     )

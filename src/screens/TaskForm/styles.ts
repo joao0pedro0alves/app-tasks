@@ -7,17 +7,17 @@ export const styles = StyleSheet.create({
         backgroundColor: "rgba(0,0,0,0.5)",
     },
     container: {
+        backgroundColor: THEME.COLORS.BACKGROUND_100,
         flex: 1,
         paddingHorizontal: 32,
         paddingVertical: 32,
-        backgroundColor: THEME.colors.background,
         borderTopRightRadius: 30,
         borderTopLeftRadius: 30,
         elevation: 15,
     },
     header: {
-        fontFamily: THEME.fontFamilyBold,
-        color: THEME.colors.primary,
+        fontFamily: THEME.FONT_FAMILY.BOLD,
+        color: THEME.COLORS.PRIMARY,
         fontSize: 20,
     },
     form: {
@@ -30,16 +30,16 @@ export const styles = StyleSheet.create({
         justifyContent: "space-between",
     },
     button: {
-        fontFamily: THEME.fontFamilyBold,
+        fontFamily: THEME.FONT_FAMILY.BOLD,
+        color: THEME.COLORS.PRIMARY,
         paddingHorizontal: 16,
         paddingVertical: 8,
-        color: THEME.colors.primary,
         borderRadius: 4,
         fontSize: 14,
     },
     buttonSave: {
-        backgroundColor: THEME.colors.primary,
-        color: THEME.colors.secondary,
+        backgroundColor: THEME.COLORS.PRIMARY,
+        color: THEME.COLORS.SECONDARY,
         elevation: 1,
     },
 })

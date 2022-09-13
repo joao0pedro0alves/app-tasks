@@ -3,7 +3,6 @@ import "moment/locale/pt-br"
 
 import {
     useFonts,
-    Lato_100Thin,
     Lato_300Light,
     Lato_400Regular,
     Lato_700Bold,
@@ -17,7 +16,6 @@ import {Home} from "./src/screens/Home"
 
 export default function App() {
     const [fontsLoaded] = useFonts({
-        Lato_100Thin,
         Lato_300Light,
         Lato_400Regular,
         Lato_700Bold,

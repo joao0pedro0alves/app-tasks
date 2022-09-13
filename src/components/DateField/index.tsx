@@ -33,7 +33,7 @@ export function DateField({placeholder, ...props}: DateFieldProps) {
                     <Icon
                         size={25}
                         name="calendar"
-                        color={THEME.colors.primary}
+                        color={THEME.COLORS.PRIMARY}
                     />
                 </TouchableOpacity>
             </View>
