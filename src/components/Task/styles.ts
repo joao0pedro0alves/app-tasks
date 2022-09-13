@@ -25,4 +25,11 @@ export const styles = StyleSheet.create({
         fontFamily: THEME.FONT_FAMILY.REGULAR,
         fontSize: 12,
     },
+    rightContent: {
+        backgroundColor: THEME.COLORS.DANGER,
+        flexDirection: "row",
+        alignItems: "center",
+        justifyContent: "flex-end",
+        paddingHorizontal: 20,
+    },
 })

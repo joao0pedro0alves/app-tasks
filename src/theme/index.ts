@@ -19,7 +19,9 @@ export const THEME = {
 
         PRIMARY: "#B13B44",
         SECONDARY: "#FFF",
+
         SUCCESS: "#4D7031",
+        DANGER: "#ef4444",
 
         TEXT: "#333",
         TEXT_SECONDARY: "#888",
