@@ -13,7 +13,7 @@ import {TextField} from "../../components/TextField"
 import {styles} from "./styles"
 
 const initialState = {
-    descr: "Tarefa #01",
+    descr: "",
     date: new Date(),
 }
 

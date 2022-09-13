@@ -3,10 +3,13 @@ import {
     View,
     Text,
     ImageBackground,
-    FlatList,
     TouchableOpacity,
+    FlatList,
+    Alert,
 } from "react-native"
 import Icon from "react-native-vector-icons/FontAwesome"
+
+import {usePersistedState} from "../../hooks/usePersistedState"
 
 import todayBanner from "../../assets/today.jpg"
 import {THEME} from "../../theme"
@@ -15,41 +18,18 @@ import {formatDate} from "../../services/utils"
 import {TaskForm} from "../TaskForm"
 import {Task, TaskData} from "../../components/Task"
 import {styles} from "./styles"
-
-const initialTasks: TaskData[] = [
-    {
-        id: Math.random(),
-        descr: "Comprar Livro de React Native",
-        estimateAt: new Date(),
-        doneAt: null,
-    },
-    {
-        id: Math.random(),
-        descr: "Ler Livro de React Native",
-        estimateAt: new Date(),
-        doneAt: new Date(),
-    },
-]
+import {TASKS_KEY} from "../../utils/storageKeys"
 
 export function Home() {
-    const [tasks, setTasks] = useState<TaskData[]>([...initialTasks])
+    const [tasks, setTasks] = usePersistedState<TaskData[]>(TASKS_KEY, [])
     const [showDoneTasks, setShowDoneTasks] = useState(true)
     const [showAddTask, setShowAddTask] = useState(false)
 
+    const filteredTasks = !showDoneTasks
+        ? tasks.filter((t) => t.doneAt === null || t.doneAt === undefined)
+        : tasks
+
     const handleToggleShowDone = () => setShowDoneTasks(!showDoneTasks)
-
-    const handleToggleTask = (taskId: number) => {
-        const updateTask = (task: TaskData) => ({
-            ...task,
-            doneAt: task.doneAt ? null : new Date(),
-        })
-
-        setTasks((previousTasks) =>
-            previousTasks.map((task) =>
-                task.id === taskId ? updateTask(task) : task
-            )
-        )
-    }
 
     const handleAdd = () => {
         setShowAddTask(true)
@@ -67,13 +47,33 @@ export function Home() {
             doneAt: null,
         }
 
+        if (!newTask.descr?.trim()) {
+            Alert.alert("Descrição não informada!")
+            return
+        }
+
         setTasks((previousTasks) => previousTasks.concat(newTask))
         handleClose()
     }
 
-    const filteredTasks = !showDoneTasks
-        ? tasks.filter((t) => t.doneAt === null || t.doneAt === undefined)
-        : tasks
+    const handleToggleTask = (taskId: number) => {
+        const updateTask = (task: TaskData) => ({
+            ...task,
+            doneAt: task.doneAt ? null : new Date(),
+        })
+
+        setTasks((previousTasks) =>
+            previousTasks.map((task) =>
+                task.id === taskId ? updateTask(task) : task
+            )
+        )
+    }
+
+    const handleRemoveTask = (taskId: number) => {
+        setTasks((previousTasks) =>
+            previousTasks.filter((task) => task.id !== taskId)
+        )
+    }
 
     return (
         <View style={styles.container}>
@@ -110,6 +110,7 @@ export function Home() {
                         <Task
                             task={{...item}}
                             onToggleTask={handleToggleTask}
+                            onRemoveTask={handleRemoveTask}
                         />
                     )}
                 />
