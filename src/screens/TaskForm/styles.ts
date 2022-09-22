@@ -9,20 +9,21 @@ export const styles = StyleSheet.create({
     container: {
         backgroundColor: THEME.COLORS.BACKGROUND_100,
         flex: 1,
-        paddingHorizontal: 32,
-        paddingVertical: 32,
-        borderTopRightRadius: 30,
-        borderTopLeftRadius: 30,
+        padding: 32,
+        marginHorizontal: 16,
+        borderRadius: 16,
         elevation: 15,
     },
     header: {
         fontFamily: THEME.FONT_FAMILY.BOLD,
         color: THEME.COLORS.PRIMARY,
         fontSize: 20,
+        marginBottom: 16
     },
     form: {
         flex: 1,
         zIndex: 2,
+        paddingBottom: 16,
     },
     buttons: {
         zIndex: 1,
@@ -30,16 +31,22 @@ export const styles = StyleSheet.create({
         justifyContent: "space-between",
     },
     button: {
-        fontFamily: THEME.FONT_FAMILY.BOLD,
-        color: THEME.COLORS.PRIMARY,
         paddingHorizontal: 16,
         paddingVertical: 8,
         borderRadius: 4,
+
+        flexDirection: 'row',
+        alignItems: 'center',
+    },
+    buttonTitle: {
         fontSize: 14,
+        fontFamily: THEME.FONT_FAMILY.BOLD,
+        color: THEME.COLORS.SECONDARY,
+        marginHorizontal: 6
     },
     buttonSave: {
         backgroundColor: THEME.COLORS.PRIMARY,
-        color: THEME.COLORS.SECONDARY,
+        // color: THEME.COLORS.SECONDARY,
         elevation: 1,
     },
 })

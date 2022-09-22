@@ -31,7 +31,7 @@ export function DateField({placeholder, ...props}: DateFieldProps) {
                 />
                 <TouchableOpacity onPress={toggleShow} style={styles.icon}>
                     <Icon
-                        size={25}
+                        size={20}
                         name="calendar"
                         color={THEME.COLORS.PRIMARY}
                     />

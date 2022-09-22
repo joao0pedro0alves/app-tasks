@@ -1,4 +1,4 @@
-import moment from "moment"
+import moment, { Moment } from "moment"
 
-export const formatDate = (format: string, date = new Date()) =>
+export const formatDate = (format: string, date: Date | Moment = new Date()) =>
     moment(date).locale("pt-br").format(format)
