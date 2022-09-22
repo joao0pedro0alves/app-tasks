@@ -7,20 +7,39 @@ import {
     FlatList,
     Alert,
 } from "react-native"
+import moment from "moment"
+
 import Icon from "react-native-vector-icons/FontAwesome"
 
-import {usePersistedState} from "../../hooks/usePersistedState"
-
 import todayBanner from "../../assets/today.jpg"
+import tomorrowBanner from "../../assets/tomorrow.jpg"
+import weekBanner from "../../assets/week.jpg"
+import monthBanner from "../../assets/month.jpg"
+
+import {TASKS_KEY} from "../../utils/storageKeys"
 import {THEME} from "../../theme"
 import {formatDate} from "../../services/utils"
+import {usePersistedState} from "../../hooks/usePersistedState"
 
 import {TaskForm} from "../TaskForm"
 import {Task, TaskData} from "../../components/Task"
 import {styles} from "./styles"
-import {TASKS_KEY} from "../../utils/storageKeys"
 
-export function Home() {
+const BANNERS = {
+    today: todayBanner,
+    tomorrow: tomorrowBanner,
+    week: weekBanner,
+    month: monthBanner,
+}
+
+interface TaskListParams {
+    title: string
+    daysAhead: number
+}
+
+export function TaskList({route, navigation}: any) {
+    const params = route.params as TaskListParams
+
     const [tasks, setTasks] = usePersistedState<TaskData[]>(TASKS_KEY, [])
     const [showDoneTasks, setShowDoneTasks] = useState(true)
     const [showAddTask, setShowAddTask] = useState(false)
@@ -28,6 +47,12 @@ export function Home() {
     const filteredTasks = !showDoneTasks
         ? tasks.filter((t) => t.doneAt === null || t.doneAt === undefined)
         : tasks
+
+    const currentDate = moment().add({days: params.daysAhead})
+
+    const handleOpenDrawer = () => {
+        navigation.openDrawer()
+    }
 
     const handleToggleShowDone = () => setShowDoneTasks(!showDoneTasks)
 
@@ -84,7 +109,11 @@ export function Home() {
             />
             <ImageBackground
                 style={styles.headerContainer}
-                source={todayBanner}
+                source={
+                    route.name
+                        ? BANNERS[route.name as keyof typeof BANNERS]
+                        : todayBanner
+                }
             >
                 <View style={styles.iconBar}>
                     <TouchableOpacity onPress={handleToggleShowDone}>
@@ -96,9 +125,11 @@ export function Home() {
                     </TouchableOpacity>
                 </View>
                 <View style={styles.titleBar}>
-                    <Text style={styles.title}>Hoje</Text>
+                    <TouchableOpacity onPress={handleOpenDrawer}>
+                        <Text style={styles.title}>{params.title}</Text>
+                    </TouchableOpacity>
                     <Text style={styles.subtitle}>
-                        {formatDate("ddd, D [de] MMMM")}
+                        {formatDate("ddd, D [de] MMMM", currentDate)}
                     </Text>
                 </View>
             </ImageBackground>

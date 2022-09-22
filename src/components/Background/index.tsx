@@ -1,4 +1,4 @@
-import {View} from "react-native"
+import {SafeAreaView} from 'react-native-safe-area-context'
 import {styles} from "./styles"
 
 interface BackgroundProps {
@@ -6,5 +6,5 @@ interface BackgroundProps {
 }
 
 export function Background(props: BackgroundProps) {
-    return <View style={styles.container}>{props.children}</View>
+    return <SafeAreaView style={styles.container}>{props.children}</SafeAreaView>
 }
